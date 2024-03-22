@@ -272,11 +272,6 @@ public class PaySlipGenerator extends javax.swing.JFrame {
             }
         });
         jtblPaySlips.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jtblPaySlips.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtblPaySlipsFocusLost(evt);
-            }
-        });
         jtblPaySlips.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtblPaySlipsMouseClicked(evt);
@@ -380,13 +375,14 @@ public class PaySlipGenerator extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtDeductionKeyTyped
 
     private void jbtnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnViewActionPerformed
-        String month = jtxtPeriod.getText().length() == 8
-                ? jtxtPeriod.getText().substring(0, 1)
-                : jtxtPeriod.getText().substring(0, 2);
+        String period = model.getValueAt(selectedRow, 0).toString();
+        String month = period.length() == 6
+                ? period.substring(0, 1)
+                : period.substring(0, 2);
 
-        String year = jtxtPeriod.getText().length() == 8
-                ? jtxtPeriod.getText().substring(4, 8)
-                : jtxtPeriod.getText().substring(5, 9);
+        String year = period.length() == 6
+                ? period.substring(2, 6)
+                : period.substring(3, 7);
 
         int[] key = {Integer.parseInt(month), Integer.parseInt(year)};
         String pl = emp.getPaySlipDetail(key);
@@ -399,10 +395,6 @@ public class PaySlipGenerator extends javax.swing.JFrame {
         selectedRow = jtblPaySlips.getSelectedRow();
         jbtnView.setVisible(true);
     }//GEN-LAST:event_jtblPaySlipsMouseClicked
-
-    private void jtblPaySlipsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtblPaySlipsFocusLost
-        //jbtnView.setVisible(false);
-    }//GEN-LAST:event_jtblPaySlipsFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

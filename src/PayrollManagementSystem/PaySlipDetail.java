@@ -1,7 +1,5 @@
 package PayrollManagementSystem;
 
-import java.util.Map;
-
 /**
  *
  * @author yanniechiem
@@ -29,9 +27,10 @@ public class PaySlipDetail extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jlblPaySlip = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        jlblPaySlip.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jlblPaySlip.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblPaySlip.setToolTipText("");
         jScrollPane1.setViewportView(jlblPaySlip);

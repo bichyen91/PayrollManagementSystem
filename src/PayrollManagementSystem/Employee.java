@@ -1,9 +1,7 @@
 package PayrollManagementSystem;
 
 import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Map;
 
 public class Employee {
 
@@ -115,7 +113,7 @@ public class Employee {
     }
 
     public String getPaySlipDetail(int[] key) {
-        return paySlips.get(key);
+        return paySlips.get(key.hashCode());
     }
     //</editor-fold>
 
@@ -193,7 +191,7 @@ public class Employee {
         int[] key = {monthPaySlip, yearPaySlip};
         DecimalFormat df = new DecimalFormat("#.##");
         StringBuilder sb = new StringBuilder();
-        sb.append("\n\n==================== Pay Slip ").append(monthPaySlip).append(yearPaySlip).append("===================\n");
+        sb.append("\n==================== Pay Slip ").append(monthPaySlip).append(yearPaySlip).append("===================\n");
         sb.append("\nA. Employee Information\n   ID: ").append(this.id).append("\n");
         sb.append("   Employee: ").append(this.name.toUpperCase()).append("\n");
         sb.append("   DOB: ").append(this.dob).append("\n");
@@ -221,8 +219,7 @@ public class Employee {
         sb.append("   Net pay: $").append(df.format((this.monthlyPayRate + this.monthlyAllowance + this.bonus)
                 - ((monthlyPayRate / this.wrkdays * this.unpaidLeavesTaken)
                 + ((this.monthlyPayRate + this.monthlyAllowance + this.bonus) * this.taxRate)
-                + this.addDeduction))
-        ).append("\n");
+                + this.addDeduction))).append("\n");
         sb.append("\n=================================================\n");
         sb.append("Contact HR for any concerns: hr@yc.com\n");
 
