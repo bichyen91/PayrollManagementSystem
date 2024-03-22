@@ -238,9 +238,6 @@
             <Component class="javax.swing.JTextField" name="jtxtPosition">
             </Component>
             <Component class="javax.swing.JTextField" name="jtxtId">
-              <Events>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtIdKeyTyped"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlblYearEmployed">
               <Properties>
@@ -393,9 +390,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jbtnAdd" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jbtnPaySlip" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbtnRefesh" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jbtnCancel" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbtnPaySlip" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -407,7 +404,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbtnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbtnPaySlip" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbtnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbtnRefesh" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -432,12 +429,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnPaySlipActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbtnCancel">
+        <Component class="javax.swing.JButton" name="jbtnRefesh">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancel"/>
+            <Property name="text" type="java.lang.String" value="Refesh"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnCancelActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnRefeshActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

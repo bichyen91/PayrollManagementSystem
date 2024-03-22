@@ -19,9 +19,9 @@ public class Payroll {
         return employeesList;
     }
 
-    public Employee getEmployee(int empId) {
+    public Employee getEmployee(String empId) {
         for (Employee emp : employeesList) {
-            if (emp.isActive() && emp.getId() == empId) {
+            if (emp.isActive() && emp.getId().equalsIgnoreCase(empId)) {
                 return emp;
             }
         }

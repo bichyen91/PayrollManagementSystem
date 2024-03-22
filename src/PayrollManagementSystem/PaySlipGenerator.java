@@ -20,7 +20,7 @@ public class PaySlipGenerator extends javax.swing.JFrame {
         initComponents();
         PaySlipGenerator.emp = emp;
         loadingPeriod(emp);
-        jlblId.setText(Integer.toString(emp.getId()));
+        jlblId.setText(emp.getId());
         jlblName.setText(emp.getName());
         jtxtLeaveRemain.setText(Integer.toString(emp.getLeavesRemain()));
         loadTable(emp);
@@ -385,7 +385,9 @@ public class PaySlipGenerator extends javax.swing.JFrame {
                 : period.substring(3, 7);
 
         int[] key = {Integer.parseInt(month), Integer.parseInt(year)};
+        
         String pl = emp.getPaySlipDetail(key);
+        
         PaySlipDetail detail = new PaySlipDetail(emp.getPaySlipDetail(key));
         detail.setVisible(true);
     }//GEN-LAST:event_jbtnViewActionPerformed

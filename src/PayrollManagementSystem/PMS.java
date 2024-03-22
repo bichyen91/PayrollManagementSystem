@@ -1,5 +1,6 @@
 package PayrollManagementSystem;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +20,6 @@ public class PMS extends javax.swing.JFrame {
      */
     public PMS() {
         initComponents();
-        jbtnCancel.setVisible(false);
         jbtnPaySlip.setVisible(false);
         jcboStatus.setEnabled(false);
         isAdd = true;
@@ -61,7 +61,7 @@ public class PMS extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jbtnAdd = new javax.swing.JButton();
         jbtnPaySlip = new javax.swing.JButton();
-        jbtnCancel = new javax.swing.JButton();
+        jbtnRefesh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -110,12 +110,6 @@ public class PMS extends javax.swing.JFrame {
         jlblDob.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jtxtDob.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        jtxtId.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtIdKeyTyped(evt);
-            }
-        });
 
         jlblYearEmployed.setText("Years employed");
         jlblYearEmployed.setToolTipText("");
@@ -300,10 +294,11 @@ public class PMS extends javax.swing.JFrame {
             }
         });
 
-        jbtnCancel.setText("Cancel");
-        jbtnCancel.addActionListener(new java.awt.event.ActionListener() {
+        jbtnRefesh.setText("Refesh");
+        jbtnRefesh.setToolTipText("");
+        jbtnRefesh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnCancelActionPerformed(evt);
+                jbtnRefeshActionPerformed(evt);
             }
         });
 
@@ -315,9 +310,9 @@ public class PMS extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jbtnAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtnPaySlip)
+                .addComponent(jbtnRefesh)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtnCancel)
+                .addComponent(jbtnPaySlip)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -327,7 +322,7 @@ public class PMS extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnAdd)
                     .addComponent(jbtnPaySlip)
-                    .addComponent(jbtnCancel))
+                    .addComponent(jbtnRefesh))
                 .addContainerGap())
         );
 
@@ -360,14 +355,13 @@ public class PMS extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnPaySlipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPaySlipActionPerformed
-        Employee emp = payroll.getEmployee(Integer.parseInt(jtxtId.getText()));
+        Employee emp = payroll.getEmployee(jtxtId.getText());
         PaySlipGenerator ps = new PaySlipGenerator(emp);
         ps.setVisible(true);
     }//GEN-LAST:event_jbtnPaySlipActionPerformed
 
     private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
-        int id = Integer.parseInt(jtxtId.getText().equals("")
-                ? "0" : jtxtId.getText());
+        String id = jtxtId.getText();
         String name = jtxtName.getText();
         String dob = jtxtDob.getText();
         String position = jtxtPosition.getText();
@@ -381,7 +375,7 @@ public class PMS extends javax.swing.JFrame {
 
         int status = jcboStatus.getSelectedIndex();
 
-        if (id <= 0 || name.equals("") || dob.equals("")
+        if (id.equals("")|| name.equals("") || dob.equals("")
                 || position.equals("") || yearEmployed <= 0
                 || payRate <= 0 || fixedAllowance <= 0) {
             JOptionPane.showMessageDialog(null, "Invalid data!",
@@ -445,26 +439,23 @@ public class PMS extends javax.swing.JFrame {
         jcboStatus.setEnabled(true);
         jtxtName.requestFocus();
         jbtnAdd.setText("Update");
-        jbtnCancel.setVisible(true);
+        jbtnRefesh.setText("Cancel");
         jbtnPaySlip.setVisible(true);
         isAdd = false;
     }//GEN-LAST:event_jtblEmployeeMouseClicked
 
-    private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
-        reset();
-    }//GEN-LAST:event_jbtnCancelActionPerformed
-
     private void jtxtYearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtYearKeyTyped
         char keyType = evt.getKeyChar();
-        if (!(Character.isDigit(keyType) || (keyType == evt.VK_BACK_SPACE) || (keyType == evt.VK_DELETE))) {
+        if (!Character.isDigit(keyType) && keyType != KeyEvent.VK_BACK_SPACE && keyType != KeyEvent.VK_DELETE) {
             // If the character is not a digit, backspace, or delete, consume the event
             evt.consume();
+        } else {
         }
     }//GEN-LAST:event_jtxtYearKeyTyped
 
     private void jtxtPayRateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPayRateKeyTyped
         char keyType = evt.getKeyChar();
-        if (!(Character.isDigit(keyType) || (keyType == evt.VK_BACK_SPACE) || (keyType == evt.VK_DELETE))) {
+        if (!(Character.isDigit(keyType) || (keyType == KeyEvent.VK_BACK_SPACE) || (keyType == KeyEvent.VK_DELETE))) {
             // If the character is not a digit, backspace, or delete, consume the event
             evt.consume();
         }
@@ -472,19 +463,17 @@ public class PMS extends javax.swing.JFrame {
 
     private void jtxtFixedAllowanceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtFixedAllowanceKeyTyped
         char keyType = evt.getKeyChar();
-        if (!(Character.isDigit(keyType) || (keyType == evt.VK_BACK_SPACE) || (keyType == evt.VK_DELETE))) {
+        if (!(Character.isDigit(keyType) || (keyType == KeyEvent.VK_BACK_SPACE) || (keyType == KeyEvent.VK_DELETE))) {
             // If the character is not a digit, backspace, or delete, consume the event
             evt.consume();
         }
     }//GEN-LAST:event_jtxtFixedAllowanceKeyTyped
 
-    private void jtxtIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtIdKeyTyped
-        char keyType = evt.getKeyChar();
-        if (!(Character.isDigit(keyType) || (keyType == evt.VK_BACK_SPACE) || (keyType == evt.VK_DELETE))) {
-            // If the character is not a digit, backspace, or delete, consume the event
-            evt.consume();
-        }
-    }//GEN-LAST:event_jtxtIdKeyTyped
+    private void jbtnRefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRefeshActionPerformed
+        loadTable();
+        reset();
+        jbtnRefesh.setText("Refresh");
+    }//GEN-LAST:event_jbtnRefeshActionPerformed
 
     public void loadTable() {
         model = (DefaultTableModel) jtblEmployee.getModel();
@@ -518,7 +507,6 @@ public class PMS extends javax.swing.JFrame {
         jtxtId.requestFocus();
         isAdd = true;
         jbtnAdd.setText("Add");
-        jbtnCancel.setVisible(false);
         jbtnPaySlip.setVisible(false);
     }
 
@@ -550,10 +538,8 @@ public class PMS extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PMS().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PMS().setVisible(true);
         });
     }
 
@@ -565,8 +551,8 @@ public class PMS extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtnAdd;
-    private javax.swing.JButton jbtnCancel;
     private javax.swing.JButton jbtnPaySlip;
+    private javax.swing.JButton jbtnRefesh;
     private javax.swing.JComboBox<String> jcboMonth;
     private javax.swing.JComboBox<String> jcboStatus;
     private javax.swing.JLabel jlblDob;
