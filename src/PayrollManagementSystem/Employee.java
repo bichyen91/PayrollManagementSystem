@@ -2,6 +2,7 @@ package PayrollManagementSystem;
 
 public class Employee {
 
+    //<editor-fold defaultstate="collapsed" desc="Attributes">
     //Company setup
     private final int wrkdays;
     private final double taxRate;
@@ -20,8 +21,9 @@ public class Employee {
 
     //Leave
     private int leavesRemain;
+    //</editor-fold>
 
-    //Contructor
+    //<editor-fold defaultstate="collapsed" desc="Contructor">
     public Employee(String id, String name, String dob, String position,
             int periodEmployed, double monthlyPayRate,
             double monthlyAllowance) {
@@ -38,6 +40,7 @@ public class Employee {
 
         this.leavesRemain = 12;
     }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Getters">
     public String getId() {
@@ -85,6 +88,7 @@ public class Employee {
     }
 
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Setters">
     public void setName(String name) {
         this.name = name;
@@ -119,8 +123,9 @@ public class Employee {
     }
     //</editor-fold>
 
-    //Payroll functions
+    //<editor-fold defaultstate="collapsed" desc="Payroll support function">
     public boolean isActive() {
         return status;
     }
+    //</editor-fold>
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class EmployeePayroll extends Employee {
 
+    //<editor-fold defaultstate="collapsed" desc="Attributes">
     private int period;
     private int periodLeavesRemain;
     private int periodPaidLeavesTaken;
@@ -18,7 +19,9 @@ public class EmployeePayroll extends Employee {
     //Additional pay
     private double bonus;
     private double addDeduction;
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Contructor">
     public EmployeePayroll(String id, String name, String dob, String position,
             int periodEmployed, double monthlyPayRate, double monthlyAllowance) {
         super(id, name, dob, position, periodEmployed, monthlyPayRate, monthlyAllowance);
@@ -27,7 +30,9 @@ public class EmployeePayroll extends Employee {
         this.periodPaidLeavesTaken = 0;
         this.periodUnpaidLeavesTaken = 0;
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Getters">
     public int getPeriod() {
         return period;
     }
@@ -44,22 +49,27 @@ public class EmployeePayroll extends Employee {
         return periodUnpaidLeavesTaken;
     }
 
-    public void updateLeaves(int numOfDayOff) {
-        if (this.getPeriodLeavesRemain() - numOfDayOff >= 0) {
-            this.periodLeavesRemain -= numOfDayOff;
-            this.periodPaidLeavesTaken = numOfDayOff;
-        } else {
-            if (this.getPeriodLeavesRemain() == 0) {
-                this.periodUnpaidLeavesTaken = numOfDayOff;
-            } else {
-                this.periodPaidLeavesTaken = this.getPeriodLeavesRemain();
-                this.periodUnpaidLeavesTaken = numOfDayOff - periodPaidLeavesTaken;
-                this.periodLeavesRemain = 0;
-            }
-        }
-        this.setLeavesRemain(this.getPeriodLeavesRemain());
+    public HashMap<Integer, String> getPaySlips() {
+        return paySlips;
     }
 
+    public String getPaySlipDetail(Integer targetKey) {
+        String result = "";
+
+        // Get the set of keys from the hashtable
+        Set<Integer> keys = paySlips.keySet();
+
+        // Iterate over the keys and print each key-value pair
+        for (Integer key : keys) {
+            if (Objects.equals(key, targetKey)) {
+                result = paySlips.get(key);
+            }
+        }
+        return result;
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Setters">
     public void setBonus(double bonus) {
         this.bonus = bonus;
     }
@@ -83,26 +93,9 @@ public class EmployeePayroll extends Employee {
     public void setPeriodUnpaidLeavesTaken(int periodUnpaidLeavesTaken) {
         this.periodUnpaidLeavesTaken = periodUnpaidLeavesTaken;
     }
+    //</editor-fold>
 
-    public HashMap<Integer, String> getPaySlips() {
-        return paySlips;
-    }
-
-    public String getPaySlipDetail(Integer targetKey) {
-        String result = "";
-
-        // Get the set of keys from the hashtable
-        Set<Integer> keys = paySlips.keySet();
-
-        // Iterate over the keys and print each key-value pair
-        for (Integer key : keys) {
-            if (Objects.equals(key, targetKey)) {
-                result = paySlips.get(key);
-            }
-        }
-        return result;
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="Payroll support function">
     public String displayPeriod(String period) {
         String month = period.length() == 5
                 ? period.substring(0, 1)
@@ -112,6 +105,22 @@ public class EmployeePayroll extends Employee {
                 ? period.substring(1, 5)
                 : period.substring(2, 6);
         return month + " - " + year;
+    }
+
+    public void updateLeaves(int numOfDayOff) {
+        if (this.getPeriodLeavesRemain() - numOfDayOff >= 0) {
+            this.periodLeavesRemain -= numOfDayOff;
+            this.periodPaidLeavesTaken = numOfDayOff;
+        } else {
+            if (this.getPeriodLeavesRemain() == 0) {
+                this.periodUnpaidLeavesTaken = numOfDayOff;
+            } else {
+                this.periodPaidLeavesTaken = this.getPeriodLeavesRemain();
+                this.periodUnpaidLeavesTaken = numOfDayOff - periodPaidLeavesTaken;
+                this.periodLeavesRemain = 0;
+            }
+        }
+        this.setLeavesRemain(this.getPeriodLeavesRemain());
     }
 
     public void generatePaySlip() {
@@ -158,4 +167,5 @@ public class EmployeePayroll extends Employee {
 
         paySlips.put(key, sb.toString());
     }
+    //</editor-fold>
 }

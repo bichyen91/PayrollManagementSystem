@@ -26,6 +26,7 @@ public class PaySlipGenerator extends javax.swing.JFrame {
         loadTable(emp);
         jbtnView.setVisible(false);
         jbtnRefesh.setVisible(false);
+        jbtnGenerate.setEnabled(emp.isActive());
     }
 
     public int mergePeriod(String period) {
@@ -132,6 +133,7 @@ public class PaySlipGenerator extends javax.swing.JFrame {
 
         jbtnGenerate.setText("Generate Pay Slip");
         jbtnGenerate.setToolTipText("");
+        jbtnGenerate.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnGenerateActionPerformed(evt);
@@ -354,7 +356,7 @@ public class PaySlipGenerator extends javax.swing.JFrame {
     private void jbtnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGenerateActionPerformed
         //Get period
         emp.setPeriod(mergePeriod(jtxtPeriod.getText()));
-        
+
         //Update leaves
         emp.updateLeaves(Integer.parseInt(jtxtLeaveTaken.getText()
                 .equals("") ? "0" : jtxtLeaveTaken.getText()));
@@ -368,7 +370,7 @@ public class PaySlipGenerator extends javax.swing.JFrame {
         emp.generatePaySlip();
         loadTable(emp);
         jbtnGenerate.setEnabled(false);
-        
+
     }//GEN-LAST:event_jbtnGenerateActionPerformed
 
     public void loadTable(EmployeePayroll emp) {
@@ -384,15 +386,15 @@ public class PaySlipGenerator extends javax.swing.JFrame {
         }
     }
 
-    public void reset(){
+    public void reset() {
         jtxtLeaveRemain.setText(Integer.toString(emp.getLeavesRemain()));
         loadingPeriod(emp);
         jtxtBonus.setText("");
         jtxtDeduction.setText("");
         jtxtLeaveTaken.setText("");
-        jbtnGenerate.setEnabled(true);
+        jbtnGenerate.setEnabled(emp.isActive());
     }
-    
+
     private void jtxtLeaveTakenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtLeaveTakenKeyTyped
         char keyType = evt.getKeyChar();
         if (!(Character.isDigit(keyType) || (keyType == KeyEvent.VK_BACK_SPACE)

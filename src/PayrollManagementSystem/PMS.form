@@ -200,12 +200,21 @@
             <Component class="javax.swing.JTextField" name="jtxtPayRate">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="toolTipText" type="java.lang.String" value="Greater than 0."/>
               </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtPayRateKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jtxtYear">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="toolTipText" type="java.lang.String" value="yyyy"/>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+              </AccessibilityProperties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtYearKeyTyped"/>
               </Events>
@@ -220,6 +229,7 @@
             <Component class="javax.swing.JTextField" name="jtxtFixedAllowance">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="4"/>
+                <Property name="toolTipText" type="java.lang.String" value="Greater than 0."/>
               </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtFixedAllowanceKeyTyped"/>
@@ -233,6 +243,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jtxtPosition">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Numbers are not allowed."/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtPositionKeyTyped"/>
               </Events>
@@ -241,7 +254,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jlblYearEmployed">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Joinning Period"/>
+                <Property name="text" type="java.lang.String" value="Joining Period"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="horizontalTextPosition" type="int" value="4"/>
               </Properties>
@@ -298,7 +311,11 @@
                   <Format format="MM/dd/yyyy" subtype="-1" type="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="toolTipText" type="java.lang.String" value="mm/dd/yyyy"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtxtDobKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -407,12 +424,17 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jbtnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbtnPaySlip" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbtnRefesh" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jbtnAdd" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jbtnPaySlip" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbtnRefesh" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>

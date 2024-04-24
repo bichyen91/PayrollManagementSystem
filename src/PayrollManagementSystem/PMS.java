@@ -78,12 +78,15 @@ public class PMS extends javax.swing.JFrame {
         jlblFixedAllowance.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jtxtPayRate.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtxtPayRate.setToolTipText("Greater than 0.");
         jtxtPayRate.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtPayRateKeyTyped(evt);
             }
         });
 
+        jtxtYear.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtYear.setToolTipText("yyyy");
         jtxtYear.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtYearKeyTyped(evt);
@@ -95,6 +98,7 @@ public class PMS extends javax.swing.JFrame {
         jlblPatRate.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jtxtFixedAllowance.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtxtFixedAllowance.setToolTipText("Greater than 0.");
         jtxtFixedAllowance.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtFixedAllowanceKeyTyped(evt);
@@ -105,13 +109,14 @@ public class PMS extends javax.swing.JFrame {
         jlblDob.setToolTipText("");
         jlblDob.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
+        jtxtPosition.setToolTipText("Numbers are not allowed.");
         jtxtPosition.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtPositionKeyTyped(evt);
             }
         });
 
-        jlblYearEmployed.setText("Joinning Period");
+        jlblYearEmployed.setText("Joining Period");
         jlblYearEmployed.setToolTipText("");
         jlblYearEmployed.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
@@ -126,6 +131,12 @@ public class PMS extends javax.swing.JFrame {
 
         jtxtDob.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MM/dd/yyyy"))));
         jtxtDob.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtDob.setToolTipText("mm/dd/yyyy");
+        jtxtDob.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtDobKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -210,6 +221,9 @@ public class PMS extends javax.swing.JFrame {
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jcboStatus, jtxtFixedAllowance, jtxtName, jtxtPosition});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jlblFixedAllowance, jlblName, jlblPosition, jlblStatus});
+
+        jtxtYear.getAccessibleContext().setAccessibleName("");
+        jtxtYear.getAccessibleContext().setAccessibleDescription("");
 
         jLabel1.setBackground(new java.awt.Color(255, 204, 204));
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
@@ -323,10 +337,13 @@ public class PMS extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnAdd)
-                    .addComponent(jbtnPaySlip)
-                    .addComponent(jbtnRefesh))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtnPaySlip)
+                            .addComponent(jbtnRefesh))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -411,7 +428,16 @@ public class PMS extends javax.swing.JFrame {
                                             "Invalid data", JOptionPane.ERROR_MESSAGE);
                                     jtxtFixedAllowance.requestFocus();
                                 } else {
-                                    isValid = true;
+                                    int birthYear = Integer.parseInt(jtxtDob.getText().substring(6, 10));
+                                    int joinedYear = Integer.parseInt(jtxtYear.getText());
+                                    if (joinedYear - birthYear < 18) {
+                                        JOptionPane.showMessageDialog(null,
+                                                "Under 18 are not eligible to work!",
+                                                "Invalid data", JOptionPane.ERROR_MESSAGE);
+                                        jtxtYear.requestFocus();
+                                    } else {
+                                        isValid = true;
+                                    }
                                 }
                             }
                         }
@@ -534,6 +560,15 @@ public class PMS extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jtxtPositionKeyTyped
+
+    private void jtxtDobKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtDobKeyTyped
+        char keyType = evt.getKeyChar();
+        if (!(Character.isDigit(keyType) || (keyType == KeyEvent.VK_BACK_SPACE)
+                || (keyType == KeyEvent.VK_SLASH) || (keyType == KeyEvent.VK_DELETE))) {
+            // If the character is not a digit, backspace, or delete, consume the event
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtxtDobKeyTyped
 
     public void loadTable() {
         model = (DefaultTableModel) jtblEmployee.getModel();
