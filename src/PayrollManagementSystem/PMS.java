@@ -367,37 +367,47 @@ public class PMS extends javax.swing.JFrame {
     public boolean isDataValid() {
         boolean isValid = false;
         if (jtxtId.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Employee ID cannot be empty!",
+            JOptionPane.showMessageDialog(null,
+                    "Employee ID cannot be empty!",
                     "Invalid data", JOptionPane.ERROR_MESSAGE);
             jtxtId.requestFocus();
         } else {
             if (jtxtName.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Employee Name cannot be empty!",
+                JOptionPane.showMessageDialog(null,
+                        "Employee Name cannot be empty!",
                         "Invalid data", JOptionPane.ERROR_MESSAGE);
                 jtxtName.requestFocus();
             } else {
                 if (jtxtDob.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "DOB cannot be empty and must be in format mm/dd/yyyy!",
+                    JOptionPane.showMessageDialog(null,
+                            "DOB cannot be empty and must be in format mm/dd/yyyy!",
                             "Invalid data", JOptionPane.ERROR_MESSAGE);
                     jtxtDob.requestFocus();
                 } else {
                     if (jtxtPosition.getText().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Position cannot be empty!",
+                        JOptionPane.showMessageDialog(null,
+                                "Position cannot be empty!",
                                 "Invalid data", JOptionPane.ERROR_MESSAGE);
                         jtxtPosition.requestFocus();
                     } else {
-                        if (jtxtYear.getText().equals("") || jtxtYear.getText().length() != 4) {
-                            JOptionPane.showMessageDialog(null, "Joinning Year cannot be empty and should has 4 digits!",
+                        if (jtxtYear.getText().equals("")
+                                || jtxtYear.getText().length() != 4) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Joinning Year cannot be empty and should has 4 digits!",
                                     "Invalid data", JOptionPane.ERROR_MESSAGE);
                             jtxtYear.requestFocus();
                         } else {
-                            if (jtxtPayRate.getText().equals("") || jtxtPayRate.getText().equals("0")) {
-                                JOptionPane.showMessageDialog(null, "Monthly pay rate cannot be empty or 0!",
+                            if (jtxtPayRate.getText().equals("")
+                                    || jtxtPayRate.getText().equals("0")) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Monthly pay rate cannot be empty or 0!",
                                         "Invalid data", JOptionPane.ERROR_MESSAGE);
                                 jtxtPayRate.requestFocus();
                             } else {
-                                if (jtxtFixedAllowance.getText().equals("") || jtxtFixedAllowance.getText().equals("0")) {
-                                    JOptionPane.showMessageDialog(null, "Monthly allowance be empty or 0!",
+                                if (jtxtFixedAllowance.getText().equals("")
+                                        || jtxtFixedAllowance.getText().equals("0")) {
+                                    JOptionPane.showMessageDialog(null,
+                                            "Monthly allowance be empty or 0!",
                                             "Invalid data", JOptionPane.ERROR_MESSAGE);
                                     jtxtFixedAllowance.requestFocus();
                                 } else {
@@ -484,7 +494,8 @@ public class PMS extends javax.swing.JFrame {
 
     private void jtxtYearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtYearKeyTyped
         char keyType = evt.getKeyChar();
-        if (!Character.isDigit(keyType) && keyType != KeyEvent.VK_BACK_SPACE && keyType != KeyEvent.VK_DELETE) {
+        if (!Character.isDigit(keyType) && keyType != KeyEvent.VK_BACK_SPACE
+                && keyType != KeyEvent.VK_DELETE) {
             // If the character is not a digit, backspace, or delete, consume the event
             evt.consume();
         } else {
@@ -493,7 +504,8 @@ public class PMS extends javax.swing.JFrame {
 
     private void jtxtPayRateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPayRateKeyTyped
         char keyType = evt.getKeyChar();
-        if (!(Character.isDigit(keyType) || (keyType == KeyEvent.VK_BACK_SPACE) || (keyType == KeyEvent.VK_DELETE))) {
+        if (!(Character.isDigit(keyType) || (keyType == KeyEvent.VK_BACK_SPACE)
+                || (keyType == KeyEvent.VK_DELETE))) {
             // If the character is not a digit, backspace, or delete, consume the event
             evt.consume();
         }
@@ -501,7 +513,8 @@ public class PMS extends javax.swing.JFrame {
 
     private void jtxtFixedAllowanceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtFixedAllowanceKeyTyped
         char keyType = evt.getKeyChar();
-        if (!(Character.isDigit(keyType) || (keyType == KeyEvent.VK_BACK_SPACE) || (keyType == KeyEvent.VK_DELETE))) {
+        if (!(Character.isDigit(keyType) || (keyType == KeyEvent.VK_BACK_SPACE)
+                || (keyType == KeyEvent.VK_DELETE))) {
             // If the character is not a digit, backspace, or delete, consume the event
             evt.consume();
         }
@@ -515,7 +528,8 @@ public class PMS extends javax.swing.JFrame {
 
     private void jtxtPositionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPositionKeyTyped
         char keyType = evt.getKeyChar();
-        if (!(Character.isAlphabetic(keyType) || (keyType == KeyEvent.VK_BACK_SPACE) || (keyType == KeyEvent.VK_DELETE))) {
+        if (!(Character.isAlphabetic(keyType) || (keyType == KeyEvent.VK_BACK_SPACE)
+                || (keyType == KeyEvent.VK_DELETE))) {
             // If the character is not Alphabetic, backspace, or delete, consume the event
             evt.consume();
         }
