@@ -9,17 +9,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PaySlipGenerator extends javax.swing.JFrame {
 
-    private static Employee emp;
+    //private static Employee emp;
+    private static EmployeePayroll emp;
     private static DefaultTableModel model;
     private static int selectedRow;
 
     /**
      * Creates new form PaySlip
      */
-    public PaySlipGenerator(Employee emp) {
+    public PaySlipGenerator(EmployeePayroll emp) {
         initComponents();
-        PaySlipGenerator.emp = emp;
         loadingPeriod(emp);
+        this.emp = emp;
         jlblId.setText(emp.getId());
         jlblName.setText(emp.getName());
         jtxtLeaveRemain.setText(Integer.toString(emp.getLeavesRemain()));
@@ -27,22 +28,52 @@ public class PaySlipGenerator extends javax.swing.JFrame {
         jbtnView.setVisible(false);
     }
 
-    public void loadingPeriod(Employee emp) {
-        int month, year;
+    public int mergePeriod(String period) {
+        String month = period.length() == 8
+                ? period.substring(0, 1)
+                : period.substring(0, 2);
+
+        String year = period.length() == 8
+                ? period.substring(4, 8)
+                : period.substring(5, 9);
+
+        return Integer.parseInt(month + year);
+
+    }
+
+    public String displayPeriodEmployed(String periodEmployed) {
+        String month = periodEmployed.length() == 5
+                ? periodEmployed.substring(0, 1)
+                : periodEmployed.substring(0, 2);
+
+        String year = periodEmployed.length() == 5
+                ? periodEmployed.substring(1, 5)
+                : periodEmployed.substring(2, 6);
+        return month + " - " + year;
+    }
+
+    public void loadingPeriod(EmployeePayroll emp) {
+
         if (emp.getPaySlips().isEmpty()) {
-            month = emp.getMonthEmployed();
-            year = emp.getYearEmployed();
-            jtxtPeriod.setText(month + " - " + Integer.toString(year));
+            jtxtPeriod.setText(displayPeriodEmployed(Integer.toString(emp.getPeriodEmployed())));
         } else {
-            month = emp.getMonthPaySlip();
+            String period = Integer.toString(emp.getPeriod());
+            int month, year;
+            month = Integer.parseInt(period.length() == 5
+                    ? period.substring(0, 1)
+                    : period.substring(0, 2));
+
+            year = Integer.parseInt(period.length() == 5
+                    ? period.substring(1, 5)
+                    : period.substring(2, 6));
+
             if (month == 12) {
                 month = 1;
-                year = emp.getYearPaySlip() + 1;
+                year = year + 1;
             } else {
                 month += 1;
-                year = emp.getYearPaySlip();
             }
-            jtxtPeriod.setText(month + " - " + Integer.toString(year));
+            jtxtPeriod.setText(month + " - " + year);
         }
     }
 
@@ -310,16 +341,8 @@ public class PaySlipGenerator extends javax.swing.JFrame {
 
     private void jbtnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGenerateActionPerformed
         //Get period
-        String month = jtxtPeriod.getText().length() == 8
-                ? jtxtPeriod.getText().substring(0, 1)
-                : jtxtPeriod.getText().substring(0, 2);
-        emp.setMonthPaySlip(Integer.parseInt(month));
-
-        String year = jtxtPeriod.getText().length() == 8
-                ? jtxtPeriod.getText().substring(4, 8)
-                : jtxtPeriod.getText().substring(5, 9);
-        emp.setYearPaySlip(Integer.parseInt(year));
-
+        emp.setPeriod(mergePeriod(jtxtPeriod.getText()));
+        
         //Update leaves
         emp.updateLeaves(Integer.parseInt(jtxtLeaveTaken.getText()
                 .equals("") ? "0" : jtxtLeaveTaken.getText()));
@@ -334,15 +357,15 @@ public class PaySlipGenerator extends javax.swing.JFrame {
         loadTable(emp);
     }//GEN-LAST:event_jbtnGenerateActionPerformed
 
-    public void loadTable(Employee emp) {
+    public void loadTable(EmployeePayroll leave) {
         model = (DefaultTableModel) jtblPaySlips.getModel();
 
         while (model.getRowCount() > 0) {
             model.removeRow(0);
         }
 
-        for (int[] key : emp.getPaySlips().keySet()) {
-            String row = Integer.toString(key[0]) + "-" + Integer.toString(key[1]);
+        for (int key : leave.getPaySlips().keySet()) {
+            String row = displayPeriodEmployed(Integer.toString(key));
             model.addRow(new Object[]{row, 0});
         }
     }
@@ -375,20 +398,10 @@ public class PaySlipGenerator extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtDeductionKeyTyped
 
     private void jbtnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnViewActionPerformed
-        String period = model.getValueAt(selectedRow, 0).toString();
-        String month = period.length() == 6
-                ? period.substring(0, 1)
-                : period.substring(0, 2);
+        int period = mergePeriod(model.getValueAt(selectedRow, 0).toString());
 
-        String year = period.length() == 6
-                ? period.substring(2, 6)
-                : period.substring(3, 7);
-
-        int[] key = {Integer.parseInt(month), Integer.parseInt(year)};
-        
-        String pl = emp.getPaySlipDetail(key);
-        
-        PaySlipDetail detail = new PaySlipDetail(emp.getPaySlipDetail(key));
+        String pl = emp.getPaySlipDetail(period);
+        PaySlipDetail detail = new PaySlipDetail(emp.getPaySlipDetail(period));
         detail.setVisible(true);
     }//GEN-LAST:event_jbtnViewActionPerformed
 

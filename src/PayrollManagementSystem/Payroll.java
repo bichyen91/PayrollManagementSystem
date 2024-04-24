@@ -5,27 +5,26 @@ import java.util.List;
 
 public class Payroll {
 
-    private List<Employee> employeesList;
+    private List<EmployeePayroll> employeesList;
 
     public Payroll() {
         this.employeesList = new LinkedList<>();
     }
 
-    public boolean addEmployee(Employee emp) {
+    public boolean addEmployee(EmployeePayroll emp) {
         return employeesList.add(emp);
     }
 
-    public List<Employee> getEmployeesList() {
+    public List<EmployeePayroll> getEmployeesList() {
         return employeesList;
     }
 
-    public Employee getEmployee(String empId) {
-        for (Employee emp : employeesList) {
+    public EmployeePayroll getEmployee(String empId) {
+        for (EmployeePayroll emp : employeesList) {
             if (emp.isActive() && emp.getId().equalsIgnoreCase(empId)) {
                 return emp;
             }
         }
         return null;
     }
-
 }

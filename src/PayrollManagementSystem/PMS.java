@@ -5,10 +5,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author yanniechiem
- */
 public class PMS extends javax.swing.JFrame {
 
     private static Payroll payroll = new Payroll();
@@ -46,13 +42,13 @@ public class PMS extends javax.swing.JFrame {
         jlblPatRate = new javax.swing.JLabel();
         jtxtFixedAllowance = new javax.swing.JTextField();
         jlblDob = new javax.swing.JLabel();
-        jtxtDob = new javax.swing.JTextField();
         jtxtPosition = new javax.swing.JTextField();
         jtxtId = new javax.swing.JTextField();
         jlblYearEmployed = new javax.swing.JLabel();
         jlblStatus = new javax.swing.JLabel();
         jcboStatus = new javax.swing.JComboBox<>();
         jcboMonth = new javax.swing.JComboBox<>();
+        jtxtDob = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -109,8 +105,6 @@ public class PMS extends javax.swing.JFrame {
         jlblDob.setToolTipText("");
         jlblDob.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
-        jtxtDob.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         jlblYearEmployed.setText("Years employed");
         jlblYearEmployed.setToolTipText("");
         jlblYearEmployed.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -123,6 +117,9 @@ public class PMS extends javax.swing.JFrame {
 
         jcboMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }));
         jcboMonth.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jtxtDob.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("MM/dd/yyyy"))));
+        jtxtDob.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,9 +139,9 @@ public class PMS extends javax.swing.JFrame {
                         .addComponent(jcboMonth, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jtxtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jtxtDob, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                    .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                    .addComponent(jtxtId, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                    .addComponent(jtxtDob))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlblFixedAllowance, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,7 +153,7 @@ public class PMS extends javax.swing.JFrame {
                     .addComponent(jtxtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtFixedAllowance, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77))
+                .addGap(53, 53, 53))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jtxtDob, jtxtId, jtxtPayRate});
@@ -180,8 +177,9 @@ public class PMS extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtxtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlblPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtDob, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblDob, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jlblDob, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxtDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jcboStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,7 +214,7 @@ public class PMS extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,9 +242,9 @@ public class PMS extends javax.swing.JFrame {
             .addGroup(jpn_functionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -258,7 +256,7 @@ public class PMS extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Date of Birth", "Position", "Year Employed", "Pay rate", "Allowance", "Status", "Leave Remain"
+                "ID", "Name", "Date of Birth", "Position", "Period Employed", "Pay rate", "Allowance", "Status", "Leave Remain"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -337,7 +335,7 @@ public class PMS extends javax.swing.JFrame {
                     .addComponent(jpn_function, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 3, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +353,7 @@ public class PMS extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnPaySlipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPaySlipActionPerformed
-        Employee emp = payroll.getEmployee(jtxtId.getText());
+        EmployeePayroll emp = payroll.getEmployee(jtxtId.getText());
         PaySlipGenerator ps = new PaySlipGenerator(emp);
         ps.setVisible(true);
     }//GEN-LAST:event_jbtnPaySlipActionPerformed
@@ -365,9 +363,11 @@ public class PMS extends javax.swing.JFrame {
         String name = jtxtName.getText();
         String dob = jtxtDob.getText();
         String position = jtxtPosition.getText();
-        int monthEmployed = jcboMonth.getSelectedIndex() + 1;
-        int yearEmployed = Integer.parseInt(jtxtYear.getText().equals("") || jtxtYear.getText().length() != 4
-                ? "0" : jtxtYear.getText());
+        String monthEmployed = Integer.toString(jcboMonth.getSelectedIndex() + 1);
+        String yearEmployed = jtxtYear.getText().length() != 4 ? "" : jtxtYear.getText();
+
+        int periodEmployed = Integer.parseInt(monthEmployed + yearEmployed);
+
         double payRate = Double.parseDouble(jtxtPayRate.getText().equals("")
                 ? "0" : jtxtPayRate.getText());
         double fixedAllowance = Double.parseDouble(jtxtFixedAllowance.getText().equals("")
@@ -375,19 +375,18 @@ public class PMS extends javax.swing.JFrame {
 
         int status = jcboStatus.getSelectedIndex();
 
-        if (id.equals("")|| name.equals("") || dob.equals("")
-                || position.equals("") || yearEmployed <= 0
+        if (id.equals("") || name.equals("") || dob.equals("")
+                || position.equals("") || yearEmployed.length() != 4
                 || payRate <= 0 || fixedAllowance <= 0) {
             JOptionPane.showMessageDialog(null, "Invalid data!",
                     "Error", JOptionPane.ERROR_MESSAGE);
             jtxtId.requestFocus();
         } else {
 
-            Employee emp;
+            EmployeePayroll emp;
             if (isAdd) {
-                emp = new Employee(id, name, dob, position, monthEmployed,
-                        yearEmployed, payRate,
-                        fixedAllowance);
+                emp = new EmployeePayroll(id, name, dob, position, periodEmployed,
+                        payRate, fixedAllowance);
 
                 boolean result = payroll.addEmployee(emp);
                 if (!result) {
@@ -400,8 +399,7 @@ public class PMS extends javax.swing.JFrame {
                 emp.setName(name);
                 emp.setDob(dob);
                 emp.setPosition(position);
-                emp.setMonthEmployed(monthEmployed);
-                emp.setYearEmployed(yearEmployed);
+                emp.setPeriodEmployed(periodEmployed);
                 emp.setMonthlyPayRate(payRate);
                 emp.setMonthlyAllowance(fixedAllowance);
                 emp.setStatus((status == 0));
@@ -483,14 +481,25 @@ public class PMS extends javax.swing.JFrame {
         }
 
         // Iterate over linked list and add data to model
-        List<Employee> empList = payroll.getEmployeesList();
+        List<EmployeePayroll> empList = payroll.getEmployeesList();
         for (Employee emp : empList) {
-            //String dateEmployed = emp.getMonthEmployed() + " - " + emp.getYearEmployed();
-            Object[] row = {emp.getId(), emp.getName(), emp.getDob(),
-                emp.getPosition(), emp.getMonthEmployed() + " - " + emp.getYearEmployed(), emp.getMonthlyPayRate(),
-                emp.getMonthlyAllowance(), emp.getStatus() == true ? "Active" : "Terminated", emp.getLeavesRemain()};
+            Object[] row = {emp.getId(), emp.getName(), emp.getDob(), emp.getPosition(),
+                displayPeriodEmployed(Integer.toString(emp.getPeriodEmployed())),
+                emp.getMonthlyPayRate(), emp.getMonthlyAllowance(),
+                emp.getStatus() == true ? "Active" : "Terminated", emp.getLeavesRemain()};
             model.addRow(row);
         }
+    }
+
+    public String displayPeriodEmployed(String periodEmployed) {
+        String month = periodEmployed.length() == 5
+                ? periodEmployed.substring(0, 1)
+                : periodEmployed.substring(0, 2);
+
+        String year = periodEmployed.length() == 5
+                ? periodEmployed.substring(1, 5)
+                : periodEmployed.substring(2, 6);
+        return month + " - " + year;
     }
 
     public void reset() {
@@ -565,7 +574,7 @@ public class PMS extends javax.swing.JFrame {
     private javax.swing.JLabel jlblYearEmployed;
     private javax.swing.JPanel jpn_function;
     private javax.swing.JTable jtblEmployee;
-    private javax.swing.JTextField jtxtDob;
+    private javax.swing.JFormattedTextField jtxtDob;
     private javax.swing.JTextField jtxtFixedAllowance;
     private javax.swing.JTextField jtxtId;
     private javax.swing.JTextField jtxtName;

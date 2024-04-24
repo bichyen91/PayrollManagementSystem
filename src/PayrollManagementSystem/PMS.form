@@ -34,7 +34,7 @@
                   <Component id="jpn_function" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -77,9 +77,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,10 +106,10 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jtxtYear" min="-2" pref="74" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jtxtDob" linkSize="5" alignment="0" pref="184" max="32767" attributes="0"/>
-                          <Component id="jtxtId" linkSize="5" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                          <Component id="jtxtId" linkSize="5" alignment="0" pref="184" max="32767" attributes="0"/>
+                          <Component id="jtxtDob" linkSize="5" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="121" max="32767" attributes="0"/>
+                      <EmptySpace pref="137" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jlblStatus" linkSize="10" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
                           <Component id="jlblFixedAllowance" linkSize="10" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
@@ -123,7 +123,7 @@
                           <Component id="jcboStatus" linkSize="8" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
                           <Component id="jtxtFixedAllowance" linkSize="8" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -141,8 +141,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jtxtPosition" linkSize="9" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jlblPosition" linkSize="11" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jtxtDob" linkSize="4" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jlblDob" linkSize="7" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jlblDob" linkSize="7" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="jtxtDob" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -230,11 +232,6 @@
                 <Property name="horizontalTextPosition" type="int" value="4"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jtxtDob">
-              <Properties>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="jtxtPosition">
             </Component>
             <Component class="javax.swing.JTextField" name="jtxtId">
@@ -292,6 +289,14 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
+            <Component class="javax.swing.JFormattedTextField" name="jtxtDob">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="MM/dd/yyyy" subtype="-1" type="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel4">
@@ -299,7 +304,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="891" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -362,7 +367,7 @@
                     <Column editable="false" title="Name" type="java.lang.Object"/>
                     <Column editable="false" title="Date of Birth" type="java.lang.Object"/>
                     <Column editable="false" title="Position" type="java.lang.Object"/>
-                    <Column editable="false" title="Year Employed" type="java.lang.Object"/>
+                    <Column editable="false" title="Period Employed" type="java.lang.Object"/>
                     <Column editable="false" title="Pay rate" type="java.lang.Object"/>
                     <Column editable="false" title="Allowance" type="java.lang.Object"/>
                     <Column editable="false" title="Status" type="java.lang.Object"/>
