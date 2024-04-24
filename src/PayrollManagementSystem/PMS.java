@@ -409,7 +409,6 @@ public class PMS extends javax.swing.JFrame {
                 }
             }
         }
-
         return isValid;
     }
 
