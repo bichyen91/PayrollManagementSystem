@@ -105,7 +105,13 @@ public class PMS extends javax.swing.JFrame {
         jlblDob.setToolTipText("");
         jlblDob.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
-        jlblYearEmployed.setText("Years employed");
+        jtxtPosition.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtxtPositionKeyTyped(evt);
+            }
+        });
+
+        jlblYearEmployed.setText("Joinning Period");
         jlblYearEmployed.setToolTipText("");
         jlblYearEmployed.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
@@ -358,35 +364,70 @@ public class PMS extends javax.swing.JFrame {
         ps.setVisible(true);
     }//GEN-LAST:event_jbtnPaySlipActionPerformed
 
-    private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
-        String id = jtxtId.getText();
-        String name = jtxtName.getText();
-        String dob = jtxtDob.getText();
-        String position = jtxtPosition.getText();
-        String monthEmployed = Integer.toString(jcboMonth.getSelectedIndex() + 1);
-        String yearEmployed = jtxtYear.getText().length() != 4 ? "" : jtxtYear.getText();
-
-        int periodEmployed = Integer.parseInt(monthEmployed + yearEmployed);
-
-        double payRate = Double.parseDouble(jtxtPayRate.getText().equals("")
-                ? "0" : jtxtPayRate.getText());
-        double fixedAllowance = Double.parseDouble(jtxtFixedAllowance.getText().equals("")
-                ? "0" : jtxtFixedAllowance.getText());
-
-        int status = jcboStatus.getSelectedIndex();
-
-        if (id.equals("") || name.equals("") || dob.equals("")
-                || position.equals("") || yearEmployed.length() != 4
-                || payRate <= 0 || fixedAllowance <= 0) {
-            JOptionPane.showMessageDialog(null, "Invalid data!",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+    public boolean isDataValid() {
+        boolean isValid = false;
+        if (jtxtId.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Employee ID cannot be empty!",
+                    "Invalid data", JOptionPane.ERROR_MESSAGE);
             jtxtId.requestFocus();
         } else {
+            if (jtxtName.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Employee Name cannot be empty!",
+                        "Invalid data", JOptionPane.ERROR_MESSAGE);
+                jtxtName.requestFocus();
+            } else {
+                if (jtxtDob.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "DOB cannot be empty and must be in format mm/dd/yyyy!",
+                            "Invalid data", JOptionPane.ERROR_MESSAGE);
+                    jtxtDob.requestFocus();
+                } else {
+                    if (jtxtPosition.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Position cannot be empty!",
+                                "Invalid data", JOptionPane.ERROR_MESSAGE);
+                        jtxtPosition.requestFocus();
+                    } else {
+                        if (jtxtYear.getText().equals("") || jtxtYear.getText().length() != 4) {
+                            JOptionPane.showMessageDialog(null, "Joinning Year cannot be empty and should has 4 digits!",
+                                    "Invalid data", JOptionPane.ERROR_MESSAGE);
+                            jtxtYear.requestFocus();
+                        } else {
+                            if (jtxtPayRate.getText().equals("") || jtxtPayRate.getText().equals("0")) {
+                                JOptionPane.showMessageDialog(null, "Monthly pay rate cannot be empty or 0!",
+                                        "Invalid data", JOptionPane.ERROR_MESSAGE);
+                                jtxtPayRate.requestFocus();
+                            } else {
+                                if (jtxtFixedAllowance.getText().equals("") || jtxtFixedAllowance.getText().equals("0")) {
+                                    JOptionPane.showMessageDialog(null, "Monthly allowance be empty or 0!",
+                                            "Invalid data", JOptionPane.ERROR_MESSAGE);
+                                    jtxtFixedAllowance.requestFocus();
+                                } else {
+                                    isValid = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
+        return isValid;
+    }
+
+
+    private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
+        if (isDataValid()) {
             EmployeePayroll emp;
+
+            String monthEmployed = Integer.toString(jcboMonth.getSelectedIndex() + 1);
+            String yearEmployed = jtxtYear.getText();
+            int periodEmployed = Integer.parseInt(monthEmployed + yearEmployed);
+            int status = jcboStatus.getSelectedIndex();
+
             if (isAdd) {
-                emp = new EmployeePayroll(id, name, dob, position, periodEmployed,
-                        payRate, fixedAllowance);
+                emp = new EmployeePayroll(jtxtId.getText(), jtxtName.getText(),
+                        jtxtDob.getText(), jtxtPosition.getText(), periodEmployed,
+                        Double.parseDouble(jtxtFixedAllowance.getText()),
+                        Double.parseDouble(jtxtFixedAllowance.getText()));
 
                 boolean result = payroll.addEmployee(emp);
                 if (!result) {
@@ -395,13 +436,13 @@ public class PMS extends javax.swing.JFrame {
                             JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                emp = payroll.getEmployee(id);
-                emp.setName(name);
-                emp.setDob(dob);
-                emp.setPosition(position);
+                emp = payroll.getEmployee(jtxtId.getText());
+                emp.setName(jtxtName.getText());
+                emp.setDob(jtxtDob.getText());
+                emp.setPosition(jtxtPosition.getText());
                 emp.setPeriodEmployed(periodEmployed);
-                emp.setMonthlyPayRate(payRate);
-                emp.setMonthlyAllowance(fixedAllowance);
+                emp.setMonthlyPayRate(Double.parseDouble(jtxtFixedAllowance.getText()));
+                emp.setMonthlyAllowance(Double.parseDouble(jtxtFixedAllowance.getText()));
                 emp.setStatus((status == 0));
             }
             loadTable();
@@ -472,6 +513,14 @@ public class PMS extends javax.swing.JFrame {
         reset();
         jbtnRefesh.setText("Refresh");
     }//GEN-LAST:event_jbtnRefeshActionPerformed
+
+    private void jtxtPositionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtPositionKeyTyped
+        char keyType = evt.getKeyChar();
+        if (!(Character.isAlphabetic(keyType) || (keyType == KeyEvent.VK_BACK_SPACE) || (keyType == KeyEvent.VK_DELETE))) {
+            // If the character is not Alphabetic, backspace, or delete, consume the event
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtxtPositionKeyTyped
 
     public void loadTable() {
         model = (DefaultTableModel) jtblEmployee.getModel();
