@@ -61,6 +61,8 @@
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
+                          <Component id="jbtnRefesh" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jbtnView" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jbtnGenerate" min="-2" max="-2" attributes="0"/>
@@ -144,6 +146,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbtnGenerate" linkSize="16" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbtnView" linkSize="16" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jbtnRefesh" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -235,6 +238,15 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnViewActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbtnRefesh">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Refesh"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnRefeshActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

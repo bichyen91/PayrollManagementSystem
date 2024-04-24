@@ -14,48 +14,14 @@ public class EmployeePayroll extends Employee {
 
     //Pay slips
     private HashMap<Integer, String> paySlips;
-    
+
     //Additional pay
     private double bonus;
     private double addDeduction;
 
-    public EmployeePayroll(String id, String name, String dob, String position, int periodEmployed, double monthlyPayRate, double monthlyAllowance) {
-        super(id, name, dob, position, periodEmployed, monthlyPayRate, monthlyAllowance);
-        this.paySlips = new HashMap<>();
-        this.periodLeavesRemain = this.getLeavesRemain();
-        this.periodPaidLeavesTaken = 0;
-        this.periodUnpaidLeavesTaken = 0;
-    }
-    
-    public EmployeePayroll(Employee emp) {
-        super(emp.getId(), emp.getName(), emp.getDob(),
-                emp.getPosition(), emp.getPeriodEmployed(),
-                emp.getMonthlyPayRate(),
-                emp.getMonthlyAllowance());
-        this.paySlips = new HashMap<>();
-        this.periodLeavesRemain = this.getLeavesRemain();
-        this.periodPaidLeavesTaken = 0;
-        this.periodUnpaidLeavesTaken = 0;
-    }
-
-    public EmployeePayroll(Employee emp, int period) {
-        super(emp.getId(), emp.getName(), emp.getDob(),
-                emp.getPosition(), emp.getPeriodEmployed(),
-                emp.getMonthlyPayRate(),
-                emp.getMonthlyAllowance());
-        this.period = period;
-        this.paySlips = new HashMap<>();
-        this.periodLeavesRemain = this.getLeavesRemain();
-        this.periodPaidLeavesTaken = 0;
-        this.periodUnpaidLeavesTaken = 0;
-    }
-
     public EmployeePayroll(String id, String name, String dob, String position,
-            int periodEmployed, double monthlyPayRate, double monthlyAllowance,
-            int period) {
-        super(id, name, dob, position, periodEmployed,
-                monthlyPayRate, monthlyAllowance);
-        this.period = period;
+            int periodEmployed, double monthlyPayRate, double monthlyAllowance) {
+        super(id, name, dob, position, periodEmployed, monthlyPayRate, monthlyAllowance);
         this.paySlips = new HashMap<>();
         this.periodLeavesRemain = this.getLeavesRemain();
         this.periodPaidLeavesTaken = 0;
@@ -137,26 +103,29 @@ public class EmployeePayroll extends Employee {
         return result;
     }
 
-    public String displayPeriodEmployed(String periodEmployed) {
-        String month = periodEmployed.length() == 5
-                ? periodEmployed.substring(0, 1)
-                : periodEmployed.substring(0, 2);
+    public String displayPeriod(String period) {
+        String month = period.length() == 5
+                ? period.substring(0, 1)
+                : period.substring(0, 2);
 
-        String year = periodEmployed.length() == 5
-                ? periodEmployed.substring(1, 5)
-                : periodEmployed.substring(2, 6);
+        String year = period.length() == 5
+                ? period.substring(1, 5)
+                : period.substring(2, 6);
         return month + " - " + year;
     }
 
     public void generatePaySlip() {
         int key = this.period;
-        String periodEmployed = displayPeriodEmployed(Integer.toString(this.getPeriodEmployed()));
+        String periodEmployed = displayPeriod(Integer.toString(this.getPeriodEmployed()));
         DecimalFormat df = new DecimalFormat("#.##");
         StringBuilder sb = new StringBuilder();
-        sb.append("==================== Period ").append(this.period).append(" - ")
-                .append(this.period).append(" ===================\n");
-        sb.append("\nA. Employee Information\n    ID: ").append(this.getId().toUpperCase()).append("\n");
-        sb.append("    Employee: ").append(this.getName().toUpperCase()).append("\n");
+        sb.append("==================== Period ")
+                .append(displayPeriod(Integer.toString(key)))
+                .append(" ===================\n");
+        sb.append("\nA. Employee Information\n    ID: ")
+                .append(this.getId().toUpperCase()).append("\n");
+        sb.append("    Employee: ").append(this.getName()
+                .toUpperCase()).append("\n");
         sb.append("    DOB: ").append(this.getDob()).append("\n");
         sb.append("    Position: ").append(this.getPosition()).append("\n");
         sb.append("    Employed period: ").append(periodEmployed).append("\n");

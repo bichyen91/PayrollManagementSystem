@@ -9,7 +9,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PaySlipGenerator extends javax.swing.JFrame {
 
-    //private static Employee emp;
     private static EmployeePayroll emp;
     private static DefaultTableModel model;
     private static int selectedRow;
@@ -19,13 +18,14 @@ public class PaySlipGenerator extends javax.swing.JFrame {
      */
     public PaySlipGenerator(EmployeePayroll emp) {
         initComponents();
-        loadingPeriod(emp);
         this.emp = emp;
+        loadingPeriod(emp);
         jlblId.setText(emp.getId());
         jlblName.setText(emp.getName());
         jtxtLeaveRemain.setText(Integer.toString(emp.getLeavesRemain()));
         loadTable(emp);
         jbtnView.setVisible(false);
+        jbtnRefesh.setVisible(false);
     }
 
     public int mergePeriod(String period) {
@@ -41,7 +41,7 @@ public class PaySlipGenerator extends javax.swing.JFrame {
 
     }
 
-    public String displayPeriodEmployed(String periodEmployed) {
+    public String displayPeriod(String periodEmployed) {
         String month = periodEmployed.length() == 5
                 ? periodEmployed.substring(0, 1)
                 : periodEmployed.substring(0, 2);
@@ -55,7 +55,7 @@ public class PaySlipGenerator extends javax.swing.JFrame {
     public void loadingPeriod(EmployeePayroll emp) {
 
         if (emp.getPaySlips().isEmpty()) {
-            jtxtPeriod.setText(displayPeriodEmployed(Integer.toString(emp.getPeriodEmployed())));
+            jtxtPeriod.setText(displayPeriod(Integer.toString(emp.getPeriodEmployed())));
         } else {
             String period = Integer.toString(emp.getPeriod());
             int month, year;
@@ -99,6 +99,7 @@ public class PaySlipGenerator extends javax.swing.JFrame {
         jtxtDeduction = new javax.swing.JTextField();
         jtxtPeriod = new javax.swing.JTextField();
         jbtnView = new javax.swing.JButton();
+        jbtnRefesh = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jlblName = new javax.swing.JLabel();
         jlblEmployee2 = new javax.swing.JLabel();
@@ -169,6 +170,14 @@ public class PaySlipGenerator extends javax.swing.JFrame {
             }
         });
 
+        jbtnRefesh.setText("Refesh");
+        jbtnRefesh.setToolTipText("");
+        jbtnRefesh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRefeshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -177,6 +186,8 @@ public class PaySlipGenerator extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbtnRefesh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnView)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnGenerate))
@@ -240,7 +251,8 @@ public class PaySlipGenerator extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnGenerate)
-                    .addComponent(jbtnView, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnView, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -355,21 +367,32 @@ public class PaySlipGenerator extends javax.swing.JFrame {
 
         emp.generatePaySlip();
         loadTable(emp);
+        jbtnGenerate.setEnabled(false);
+        
     }//GEN-LAST:event_jbtnGenerateActionPerformed
 
-    public void loadTable(EmployeePayroll leave) {
+    public void loadTable(EmployeePayroll emp) {
         model = (DefaultTableModel) jtblPaySlips.getModel();
 
         while (model.getRowCount() > 0) {
             model.removeRow(0);
         }
 
-        for (int key : leave.getPaySlips().keySet()) {
-            String row = displayPeriodEmployed(Integer.toString(key));
+        for (int key : emp.getPaySlips().keySet()) {
+            String row = displayPeriod(Integer.toString(key));
             model.addRow(new Object[]{row, 0});
         }
     }
 
+    public void reset(){
+        jtxtLeaveRemain.setText(Integer.toString(emp.getLeavesRemain()));
+        loadingPeriod(emp);
+        jtxtBonus.setText("");
+        jtxtDeduction.setText("");
+        jtxtLeaveTaken.setText("");
+        jbtnGenerate.setEnabled(true);
+    }
+    
     private void jtxtLeaveTakenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtLeaveTakenKeyTyped
         char keyType = evt.getKeyChar();
         if (!(Character.isDigit(keyType) || (keyType == KeyEvent.VK_BACK_SPACE)
@@ -409,13 +432,19 @@ public class PaySlipGenerator extends javax.swing.JFrame {
         model = (DefaultTableModel) jtblPaySlips.getModel();
         selectedRow = jtblPaySlips.getSelectedRow();
         jbtnView.setVisible(true);
+        jbtnRefesh.setVisible(true);
     }//GEN-LAST:event_jtblPaySlipsMouseClicked
+
+    private void jbtnRefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRefeshActionPerformed
+        reset();
+    }//GEN-LAST:event_jbtnRefeshActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtnGenerate;
+    private javax.swing.JButton jbtnRefesh;
     private javax.swing.JButton jbtnView;
     private javax.swing.JLabel jlblBonus;
     private javax.swing.JLabel jlblDeduction;
