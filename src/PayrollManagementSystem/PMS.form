@@ -452,7 +452,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jbtnPaySlip">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pay Slip"/>
+            <Property name="text" type="java.lang.String" value="Pay Slip Generator"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>

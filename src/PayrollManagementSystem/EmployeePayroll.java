@@ -52,21 +52,6 @@ public class EmployeePayroll extends Employee {
     public HashMap<Integer, String> getPaySlips() {
         return paySlips;
     }
-
-    public String getPaySlipDetail(Integer targetKey) {
-        String result = "";
-
-        // Get the set of keys from the hashtable
-        Set<Integer> keys = paySlips.keySet();
-
-        // Iterate over the keys and print each key-value pair
-        for (Integer key : keys) {
-            if (Objects.equals(key, targetKey)) {
-                result = paySlips.get(key);
-            }
-        }
-        return result;
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Setters">
@@ -123,6 +108,21 @@ public class EmployeePayroll extends Employee {
         this.setLeavesRemain(this.getPeriodLeavesRemain());
     }
 
+    public String displayPaySlipDetail(Integer targetKey) {
+        String result = "";
+
+        // Get the set of keys from the hashtable
+        Set<Integer> keys = paySlips.keySet();
+
+        // Iterate over the keys and print each key-value pair
+        for (Integer key : keys) {
+            if (Objects.equals(key, targetKey)) {
+                result = paySlips.get(key);
+            }
+        }
+        return result;
+    }
+    
     public void generatePaySlip() {
         int key = this.period;
         String periodEmployed = displayPeriod(Integer.toString(this.getPeriodEmployed()));

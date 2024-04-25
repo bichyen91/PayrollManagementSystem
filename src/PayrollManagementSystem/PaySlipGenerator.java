@@ -425,8 +425,8 @@ public class PaySlipGenerator extends javax.swing.JFrame {
     private void jbtnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnViewActionPerformed
         int period = mergePeriod(model.getValueAt(selectedRow, 0).toString());
 
-        String pl = emp.getPaySlipDetail(period);
-        PaySlipDetail detail = new PaySlipDetail(emp.getPaySlipDetail(period));
+        String pl = emp.displayPaySlipDetail(period);
+        PaySlipDetail detail = new PaySlipDetail(emp.displayPaySlipDetail(period));
         detail.setVisible(true);
     }//GEN-LAST:event_jbtnViewActionPerformed
 

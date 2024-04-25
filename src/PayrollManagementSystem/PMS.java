@@ -304,7 +304,7 @@ public class PMS extends javax.swing.JFrame {
             }
         });
 
-        jbtnPaySlip.setText("Pay Slip");
+        jbtnPaySlip.setText("Pay Slip Generator");
         jbtnPaySlip.setToolTipText("");
         jbtnPaySlip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -430,13 +430,20 @@ public class PMS extends javax.swing.JFrame {
                                 } else {
                                     int birthYear = Integer.parseInt(jtxtDob.getText().substring(6, 10));
                                     int joinedYear = Integer.parseInt(jtxtYear.getText());
-                                    if (joinedYear - birthYear < 18) {
+                                    if (joinedYear < birthYear) {
                                         JOptionPane.showMessageDialog(null,
-                                                "Under 18 are not eligible to work!",
+                                                "Joining year is before birth year. ",
                                                 "Invalid data", JOptionPane.ERROR_MESSAGE);
                                         jtxtYear.requestFocus();
                                     } else {
-                                        isValid = true;
+                                        if (joinedYear - birthYear < 18) {
+                                            JOptionPane.showMessageDialog(null,
+                                                    "You are under 18.",
+                                                    "Invalid data", JOptionPane.ERROR_MESSAGE);
+                                            jtxtYear.requestFocus();
+                                        } else {
+                                            isValid = true;
+                                        }
                                     }
                                 }
                             }
