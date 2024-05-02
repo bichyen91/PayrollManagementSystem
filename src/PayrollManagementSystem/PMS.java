@@ -468,7 +468,7 @@ public class PMS extends javax.swing.JFrame {
             if (isAdd) {
                 emp = new EmployeePayroll(jtxtId.getText(), jtxtName.getText(),
                         jtxtDob.getText(), jtxtPosition.getText(), periodEmployed,
-                        Double.parseDouble(jtxtFixedAllowance.getText()),
+                        Double.parseDouble(jtxtPayRate.getText()),
                         Double.parseDouble(jtxtFixedAllowance.getText()));
 
                 boolean result = payroll.addEmployee(emp);

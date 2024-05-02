@@ -137,7 +137,7 @@ public class EmployeePayroll extends Employee {
                 .toUpperCase()).append("\n");
         sb.append("    DOB: ").append(this.getDob()).append("\n");
         sb.append("    Position: ").append(this.getPosition()).append("\n");
-        sb.append("    Employed period: ").append(periodEmployed).append("\n");
+        sb.append("    Joined period: ").append(periodEmployed).append("\n");
         sb.append("\nB. Leaves\n");
         sb.append("    Paid Leaves this period: ").append(this.getPeriodPaidLeavesTaken()).append(" day(s)\n");
         sb.append("    Unpaid Leaves this period: ").append(this.getPeriodUnpaidLeavesTaken()).append(" day(s)\n");
